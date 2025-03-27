@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'], weights: [400, 500, 600, 700] });
+const inter = Inter({ subsets: ['latin']});
 
 export const metadata = {
   title: 'ChatCompat',

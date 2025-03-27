@@ -9,10 +9,17 @@ import locale from 'react-json-editor-ajrm/locale/en';
 import ResultsDisplay from './ResultsDisplay';
 import StreamingOutput from './StreamingOutput';
 
+// Define the payload type
+interface Payload {
+  model: string;
+  messages: { role: string; content: string }[];
+  stream: boolean;
+}
+
 export default function TestForm() {
   const [url, setUrl] = useState('');
   const [apiKey, setApiKey] = useState('');
-  const [payload, setPayload] = useState({
+  const [payload, setPayload] = useState<Payload>({
     model: 'gpt-3.5-turbo',
     messages: [{ role: 'user', content: 'Hello, are you compatible?' }],
     stream: false,
@@ -70,18 +77,14 @@ export default function TestForm() {
             locale={locale}
             height="200px"
             width="100%"
-            onChange={(event: { jsObject?: typeof payload; error?: any }) => {
+            onChange={(event: { jsObject?: Payload; error?: any }) => {
               if (event.jsObject) {
                 setPayload(event.jsObject);
               }
             }}
             style={{
               body: { backgroundColor: '#ffffff', color: '#333', fontSize: '14px', fontFamily: 'Inter, sans-serif' },
-              label: { color: '#666' },
-              string: { color: '#d14' },
-              number: { color: '#099' },
-              boolean: { color: '#07a' },
-              null: { color: '#90c' },
+              labels: { color: '#666' }, // Changed from "labels" to "label"
             }}
           />
         </div>
